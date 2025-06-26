@@ -1,0 +1,240 @@
+{
+  "info": {
+    "name": "Crypto Tracker API",
+    "description": "Collection for testing cryptocurrency tracker APIs with portfolio management",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Test API",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/test",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "test"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Portfolio Management",
+      "item": [
+        {
+          "name": "Get Portfolio",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/portfolio",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "portfolio"]
+            },
+            "description": "Fetch user's portfolio with all coins and their details"
+          },
+          "response": []
+        },
+        {
+          "name": "Add Coin to Portfolio",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"coinId\": \"bitcoin\",\n  \"amount\": 0.5\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/portfolio",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "portfolio"]
+            },
+            "description": "Add a new coin to the portfolio with specified amount"
+          },
+          "response": []
+        },
+        {
+          "name": "Add Ethereum to Portfolio",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"coinId\": \"ethereum\",\n  \"amount\": 2.0\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/portfolio",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "portfolio"]
+            },
+            "description": "Example: Add Ethereum to portfolio"
+          },
+          "response": []
+        },
+        {
+          "name": "Remove Coin from Portfolio",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/portfolio/bitcoin",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "portfolio", "bitcoin"]
+            },
+            "description": "Remove a specific coin from the portfolio by coinId"
+          },
+          "response": []
+        },
+        {
+          "name": "Remove Ethereum from Portfolio",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/portfolio/ethereum",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "portfolio", "ethereum"]
+            },
+            "description": "Example: Remove Ethereum from portfolio"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Error Testing",
+      "item": [
+        {
+          "name": "Add Coin - Missing Data",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"coinId\": \"bitcoin\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/portfolio",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "portfolio"]
+            },
+            "description": "Test error handling when amount is missing"
+          },
+          "response": []
+        },
+        {
+          "name": "Add Coin - Invalid Amount",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"coinId\": \"bitcoin\",\n  \"amount\": \"invalid\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/portfolio",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "portfolio"]
+            },
+            "description": "Test error handling with invalid amount value"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Crypto Data",
+      "item": [
+        {
+          "name": "Get Trending Cryptocurrencies",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/crypto/trending",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "crypto", "trending"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Market Data",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/crypto/markets?vs_currency=usd&per_page=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "crypto", "markets"],
+              "query": [
+                {
+                  "key": "vs_currency",
+                  "value": "usd"
+                },
+                {
+                  "key": "per_page",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Crypto Details - Bitcoin",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/crypto/bitcoin",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "crypto", "bitcoin"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Crypto Details - Ethereum",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/crypto/ethereum",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "crypto", "ethereum"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
